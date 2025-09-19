@@ -10,10 +10,9 @@ export default function Home() {
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=dubai&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
-  const fetchWeather = (e) => {
-    e.preventDefault();
+  const fetchWeather = () => {
     setLoading(true);
     axios.get(url).then((response) => {
       setWeather(response.data);
@@ -28,7 +27,7 @@ export default function Home() {
       <Image
         src="/background.jpg"
         alt="Background Image"
-        layout="fill"
+        fill
         className="object-cover"
       />
       {/* Image overlay */}
@@ -47,6 +46,7 @@ export default function Home() {
             type="text"
             placeholder="Search for a city"
             className="flex-1 bg-transparent text-white placeholder-white/70 px-4 py-2 focus:outline-none"
+            onChange={(e) => setCity(e.target.value)}
           />
           <button
             type="submit"
