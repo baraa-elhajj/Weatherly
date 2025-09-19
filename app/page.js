@@ -1,6 +1,10 @@
 "use client";
+
 import axios from "axios";
+import Image from "next/image";
 import { useState } from "react";
+import { BsSearch } from "react-icons/bs";
+
 export default function Home() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
@@ -29,6 +33,28 @@ export default function Home() {
       />
       {/* Image overlay */}
       <div className="absolute inset-0 bg-black/30" />
+
+      {/* Search section */}
+      <div className="absolute inset-0 flex justify-center items-start pt-10">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchWeather();
+          }}
+          className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent backdrop-blur-xl rounded-full shadow-lg p-2 border border-white/20"
+        >
+          <input
+            type="text"
+            placeholder="Search for a city"
+            className="flex-1 bg-transparent text-white placeholder-white/70 px-4 py-2 focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="p-3 rounded-full bg-white/20 text-white shadow-md transition-all hover:bg-white/30 hover:scale-105 active:scale-95"
+          >
+            <BsSearch className="text-xl" />
+          </button>
+        </form>
       </div>
     </div>
   );
