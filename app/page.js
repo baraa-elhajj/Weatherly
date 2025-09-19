@@ -1,5 +1,6 @@
 "use client";
 
+import WeatherCard from "@/components/WeatherCard";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
@@ -56,6 +57,8 @@ export default function Home() {
           </button>
         </form>
       </div>
+
+      <WeatherCard />
     </div>
   );
 }
