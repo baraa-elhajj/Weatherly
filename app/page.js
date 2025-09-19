@@ -20,10 +20,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Hello
-      </h1>
+    <div>
+      <Image
+        src="/background.jpg"
+        alt="Background Image"
+        layout="fill"
+        className="object-cover"
+      />
+      {/* Image overlay */}
+      <div className="absolute inset-0 bg-black/30" />
+      </div>
     </div>
   );
 }
