@@ -13,6 +13,15 @@ export default function Home() {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (!city || city === "") {
+      alert("You must enter a city");
+      return;
+    }
+    fetchWeather();
+  };
+
   const fetchWeather = () => {
     setLoading(true);
     axios.get(url).then((response) => {
@@ -37,10 +46,7 @@ export default function Home() {
       {/* Search section */}
       <div className="absolute inset-0 flex justify-center items-start pt-10">
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            fetchWeather();
-          }}
+          onSubmit={handleOnSubmit}
           className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent backdrop-blur-xl rounded-full shadow-lg p-2 border border-white/20"
         >
           <input
