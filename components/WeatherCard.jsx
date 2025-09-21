@@ -3,7 +3,7 @@ import { getCurrentFormattedDateAlpha } from "@/utils/dateFormatter";
 export default function WeatherCard({ data }) {
   return (
     <div className="flex justify-center items-center mt-50">
-      <div className="bg-white/20 backdrop-blur-xl rounded-2xl shadow-xl p-6 w-[90%] sm:w-96 border border-white/30 text-white">
+      <div className="bg-white/20 backdrop-blur-sm rounded-2xl shadow-xl p-6 w-[90%] sm:w-96 border border-white/30 text-white">
         <div className="text-center mb-4">
           <h2 className="text-2xl font-bold">{data.name}</h2>
           <p className="text-sm opacity-80">{getCurrentFormattedDateAlpha()}</p>

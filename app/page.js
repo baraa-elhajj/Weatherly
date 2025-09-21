@@ -70,7 +70,7 @@ export default function Home() {
       <div className="absolute inset-0 flex justify-center items-start pt-16">
         <form
           onSubmit={handleOnSubmit}
-          className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent backdrop-blur-xl rounded-full shadow-lg p-2 border border-white/20"
+          className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent rounded-full shadow-lg p-2 border border-white/30"
         >
           <input
             type="text"
