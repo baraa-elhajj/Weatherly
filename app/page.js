@@ -8,10 +8,15 @@ import { BsSearch } from "react-icons/bs";
 
 export default function Home() {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState({});
+  const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather`;
+  const params = {
+    q: city,
+    units: "metric",
+    appid: process.env.NEXT_PUBLIC_WEATHER_KEY,
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -22,12 +27,19 @@ export default function Home() {
     fetchWeather();
   };
 
-  const fetchWeather = () => {
+  const fetchWeather = async () => {
     setLoading(true);
-    axios.get(url).then((response) => {
-      setWeather(response.data);
-      console.log(response.data);
-    });
+    await axios
+      .get(url, { params })
+      .then((response) => {
+        setWeatherData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Server Error:", error.response.data);
+        alert(`Error: ${error.response.data.message}`);
+      });
+
     setCity("");
     setLoading(false);
   };
@@ -64,7 +76,7 @@ export default function Home() {
         </form>
       </div>
 
-      {weather?.main && <WeatherCard data={weather} />}
+      {weatherData?.main && <WeatherCard data={weatherData} />}
     </div>
   );
 }
