@@ -3,13 +3,20 @@
 import WeatherCard from "@/components/WeatherCard";
 import axios from "axios";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const savedWeatherData = localStorage.getItem("weatherData");
+    if (savedWeatherData) {
+      setWeatherData(JSON.parse(savedWeatherData));
+    }
+  }, []);
 
   const url = `https://api.openweathermap.org/data/2.5/weather`;
   const params = {
@@ -24,6 +31,7 @@ export default function Home() {
       alert("You must enter a city");
       return;
     }
+
     fetchWeather();
   };
 
@@ -33,6 +41,7 @@ export default function Home() {
       .get(url, { params })
       .then((response) => {
         setWeatherData(response.data);
+        localStorage.setItem("weatherData", JSON.stringify(response.data));
         console.log(response.data);
       })
       .catch((error) => {
