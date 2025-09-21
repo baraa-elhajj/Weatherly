@@ -1,9 +1,11 @@
 "use client";
 
 import WeatherCard from "@/components/WeatherCard";
+import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
 
 export default function Home() {
@@ -28,7 +30,7 @@ export default function Home() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (!city || city === "") {
-      alert("You must enter a city");
+      toast.error("You must enter a city!");
       return;
     }
 
@@ -46,7 +48,7 @@ export default function Home() {
       })
       .catch((error) => {
         console.error("Server Error:", error.response.data);
-        alert(`Error: ${error.response.data.message}`);
+        toast.error(capitalizeFirstLetter(error.response.data.message));
       });
 
     setCity("");
@@ -65,7 +67,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-black/30" />
 
       {/* Search section */}
-      <div className="absolute inset-0 flex justify-center items-start pt-10">
+      <div className="absolute inset-0 flex justify-center items-start pt-16">
         <form
           onSubmit={handleOnSubmit}
           className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent backdrop-blur-xl rounded-full shadow-lg p-2 border border-white/20"
@@ -75,10 +77,11 @@ export default function Home() {
             placeholder="Search for a city"
             className="flex-1 bg-transparent text-white placeholder-white/70 px-4 py-2 focus:outline-none"
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
           <button
             type="submit"
-            className="p-3 rounded-full bg-white/20 text-white shadow-md transition-all hover:bg-white/30 hover:scale-105 active:scale-95"
+            className="p-3 rounded-full bg-blue-400 text-white shadow-md transition-all hover:bg-blue-400/80 hover:scale-105 active:scale-95"
           >
             <BsSearch className="text-xl" />
           </button>
