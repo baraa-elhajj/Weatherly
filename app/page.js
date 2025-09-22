@@ -1,23 +1,28 @@
 "use client";
 
+import SearchBar from "@/components/SearchBar";
 import WeatherCard from "@/components/WeatherCard";
 import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { BsSearch } from "react-icons/bs";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const savedWeatherData = localStorage.getItem("weatherData");
     if (savedWeatherData) {
       setWeatherData(JSON.parse(savedWeatherData));
     }
+  }, []);
+
+  useEffect(() => {
+    inputRef.current?.focus();
   }, []);
 
   const url = `https://api.openweathermap.org/data/2.5/weather`;
@@ -34,7 +39,9 @@ export default function Home() {
       return;
     }
 
-    fetchWeather();
+    fetchWeather().finally(() => {
+      inputRef.current?.focus();
+    });
   };
 
   const fetchWeather = async () => {
@@ -66,27 +73,13 @@ export default function Home() {
       {/* Image overlay */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Search section */}
-      <div className="absolute inset-0 flex justify-center items-start pt-16">
-        <form
-          onSubmit={handleOnSubmit}
-          className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent rounded-full shadow-lg p-2 border border-white/30"
-        >
-          <input
-            type="text"
-            placeholder="Search for a city"
-            className="flex-1 bg-transparent text-white placeholder-white/70 px-4 py-2 focus:outline-none"
-            onChange={(e) => setCity(e.target.value)}
-            value={city}
-          />
-          <button
-            type="submit"
-            className="p-3 rounded-full bg-blue-400 text-white shadow-md transition-all hover:bg-blue-400/80 hover:scale-105 active:scale-95"
-          >
-            <BsSearch className="text-xl" />
-          </button>
-        </form>
-      </div>
+      <SearchBar
+        city={city}
+        setCity={setCity}
+        onSubmit={handleOnSubmit}
+        loading={loading}
+        inputRef={inputRef}
+      />
 
       {weatherData?.main && <WeatherCard data={weatherData} />}
     </div>
