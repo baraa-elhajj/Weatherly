@@ -82,6 +82,12 @@ then go to http://localhost:3000
 
 ---
 
+## Live Demo
+
+Deployed on Vercel: https://weatherly-lb.vercel.app/
+
+---
+
 ## Contribution
 
 Feel free to fork this project or suggest improvements if you find something cool!
