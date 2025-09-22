@@ -44,7 +44,7 @@ A simple, responsive weather app built with **Next.js**, **React**, and **Tailwi
 - **Frontend:** [Next.js](https://nextjs.org/), [React](https://react.dev/)
 - **Styling:** [TailwindCSS](https://tailwindcss.com/) + [React Hot Toast](https://react-hot-toast.com/)
 - **Icons:** [React Icons](https://react-icons.github.io/react-icons/)
-- **API:** [Axios](https://axios-http.com/docs/intro) promise API and [OpenWeatherMap API](https://openweathermap.org/api) to fetch weather data
+- **API:** [Axios](https://axios-http.com/docs/intro) promise API and [OpenWeatherMap API](https://openweathermap.org/api) to fetch weather data.
 
 ---
 
