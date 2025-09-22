@@ -63,14 +63,13 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <Image
         src="/background.jpg"
         alt="Background Image"
         fill
         className="object-cover"
       />
-      {/* Image overlay */}
       <div className="absolute inset-0 bg-black/30" />
 
       <SearchBar
@@ -82,6 +81,6 @@ export default function Home() {
       />
 
       {weatherData?.main && <WeatherCard data={weatherData} />}
-    </div>
+    </>
   );
 }
