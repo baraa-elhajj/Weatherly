@@ -53,7 +53,7 @@ A simple, responsive weather app built with **Next.js**, **React**, and **Tailwi
 1. Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/baraa-elhajj/weatherly.git
+git clone https://github.com/baraa-elhajj/Weatherly.git
 cd weatherly
 npm install
 ```
