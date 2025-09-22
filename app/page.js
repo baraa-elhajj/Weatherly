@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 export default function Home() {
   const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
 
@@ -51,36 +51,44 @@ export default function Home() {
       .then((response) => {
         setWeatherData(response.data);
         localStorage.setItem("weatherData", JSON.stringify(response.data));
-        console.log(response.data);
       })
       .catch((error) => {
-        console.error("Server Error:", error.response.data);
-        toast.error(capitalizeFirstLetter(error.response.data.message));
+        console.error("Server Error:", error.response?.data);
+        toast.error(
+          capitalizeFirstLetter(
+            error.response?.data?.message || "Error fetching weather"
+          )
+        );
       });
-
     setCity("");
     setLoading(false);
   };
 
   return (
-    <>
+    <div className="relative min-h-screen w-full overflow-hidden">
       <Image
         src="/background.jpg"
-        alt="Background Image"
+        alt="Background"
         fill
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
 
-      <SearchBar
-        city={city}
-        setCity={setCity}
-        onSubmit={handleOnSubmit}
-        loading={loading}
-        inputRef={inputRef}
-      />
+      <div className="relative z-20">
+        <SearchBar
+          city={city}
+          setCity={setCity}
+          onSubmit={handleOnSubmit}
+          loading={loading}
+          inputRef={inputRef}
+        />
+      </div>
 
-      {weatherData?.main && <WeatherCard data={weatherData} />}
-    </>
+      {weatherData?.main && (
+        <div className="absolute inset-0 flex justify-center items-center mt-30">
+          <WeatherCard data={weatherData} />
+        </div>
+      )}
+    </div>
   );
 }

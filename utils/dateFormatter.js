@@ -3,6 +3,5 @@ export function getCurrentFormattedDateAlpha() {
     weekday: "long",
     month: "long",
     day: "numeric",
-    year: "numeric",
   });
 }
