@@ -1,8 +1,11 @@
 import { getCurrentFormattedDateAlpha } from "@/utils/dateFormatter";
 import { WiHumidity } from "react-icons/wi";
 import { LuWind, LuThermometer } from "react-icons/lu";
+import { getIconSrc } from "@/utils/customWeatherIcon";
 
 export default function WeatherCard({ data }) {
+  const iconSrc = getIconSrc(data.weather?.[0]);
+
   return (
     <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-[90%] sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
       <div className="text-center mb-4 sm:mb-6">
@@ -17,7 +20,7 @@ export default function WeatherCard({ data }) {
           {Math.round(data.main.temp)}°C
         </span>
         <img
-          src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+          src={iconSrc}
           alt={data.weather[0].description}
           className="w-16 h-16 sm:w-24 sm:h-24 my-2"
         />
