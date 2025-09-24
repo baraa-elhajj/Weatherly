@@ -8,7 +8,7 @@ export default function SearchBar({
   inputRef,
 }) {
   return (
-    <div className="flex justify-center items-start pt-16 sm:pt-16 px-4">
+    <div className="flex justify-center items-start pt-16 sm:pt-16 px-4 mt-3">
       <form
         onSubmit={onSubmit}
         className="flex items-center w-[90%] sm:w-full max-w-md bg-transparent rounded-full shadow-lg border border-white/30 p-2 sm:p-3"
