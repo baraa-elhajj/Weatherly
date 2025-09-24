@@ -11,9 +11,11 @@ export default function Logo() {
             alt="Weatherly Logo"
             width={32}
             height={32}
-            className="rounded-md shadow-md hover:scale-105 transition-transform duration-200"
+            className="rounded-md hover:scale-105 transition-transform duration-200"
           />
-          <p className="text-white text-lg font-bold ">Weatherly</p>
+          <p className="text-white text-lg font-bold animate-blink">
+            Weatherly
+          </p>
         </div>
       </Link>
     </div>
