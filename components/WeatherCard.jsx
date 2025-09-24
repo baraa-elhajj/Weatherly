@@ -11,7 +11,7 @@ export default function WeatherCard({ data }) {
       <div className="text-center mb-4 sm:mb-6">
         <div className="flex flex-row items-center justify-center gap-1">
           <h2 className="text-4xl font-bold">{data.name}</h2>
-          <div className="text-xs bg-white/20 rounded-xl p-1">
+          <div className="text-xs bg-white/20 rounded-xl px-1 pt-1 pb-0.5 mt-1.5">
             {data.sys.country}
           </div>
         </div>
