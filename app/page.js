@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorToast from "@/utils/ErrorToast";
 import SearchBar from "@/components/SearchBar";
 import SuggestionsList from "@/components/SuggestionsList";
 import WeatherCard from "@/components/WeatherCard";
@@ -7,7 +8,6 @@ import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
 
 export default function Home() {
   const [city, setCity] = useState("");
@@ -51,7 +51,7 @@ export default function Home() {
         })
         .catch((error) => {
           console.error("Server Error:", error.response?.data);
-          toast.error(
+          ErrorToast(
             capitalizeFirstLetter(
               error.response?.data?.message || "Error fetching cities"
             )
@@ -65,7 +65,7 @@ export default function Home() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (!city || city === "") {
-      toast.error("You must enter a city!");
+      ErrorToast("You must enter a city!");
       return;
     }
 
@@ -99,7 +99,7 @@ export default function Home() {
       })
       .catch((error) => {
         console.error("Server Error:", error.response?.data);
-        toast.error(
+        ErrorToast(
           capitalizeFirstLetter(
             error.response?.data?.message || "Error fetching weather"
           )
