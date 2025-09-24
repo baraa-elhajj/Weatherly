@@ -9,6 +9,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Menu from "@/components/Menu";
+import Logo from "@/components/Logo";
 
 export default function Home() {
   const [city, setCity] = useState("");
@@ -108,6 +109,7 @@ export default function Home() {
 
   return (
     <>
+      <Logo />
       <Menu />
 
       <div className="relative min-h-screen w-full overflow-hidden">
