@@ -69,9 +69,7 @@ export default function Home() {
       return;
     }
 
-    fetchWeather().finally(() => {
-      inputRef.current?.focus();
-    });
+    fetchWeather();
   };
 
   const handleOnSelect = (city) => {
