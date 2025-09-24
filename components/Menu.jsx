@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
+import { GoBookmarkFill, GoHomeFill } from "react-icons/go";
 
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,14 +28,18 @@ export default function Menu() {
           className="p-2 rounded-xl hover:bg-blue-300/60 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          Home
+          <div className="flex flex-row gap-2">
+            <GoHomeFill size="20" /> Home
+          </div>
         </a>
         <a
           href="#saved"
           className="p-2 rounded-xl hover:bg-blue-300/60 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          Saved
+          <div className="flex flex-row items-center gap-2">
+            <GoBookmarkFill size="20" /> Saved
+          </div>
         </a>
       </div>
     </div>
