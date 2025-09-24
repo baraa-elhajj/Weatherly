@@ -10,7 +10,7 @@ export default function Menu() {
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-full text-white bg-blue-300/40 shadow-lg hover:scale-105 transition-all duration-200"
+        className="cursor-pointer p-2 rounded-full text-white bg-blue-300/40 shadow-lg hover:scale-105 transition-all duration-200"
       >
         {isOpen ? <RxCross2 size={20} /> : <RxHamburgerMenu size={20} />}
       </button>

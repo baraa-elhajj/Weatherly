@@ -23,7 +23,7 @@ export default function SearchBar({
         />
         <button
           type="submit"
-          className="flex-shrink-0 p-3 sm:p-3 sm:text-base rounded-full bg-blue-400/80 text-white shadow-md transition-all hover:bg-blue-400 hover:scale-105 active:scale-95"
+          className="cursor-pointer flex-shrink-0 p-3 sm:p-3 sm:text-base rounded-full bg-blue-400/80 text-white shadow-md transition-all hover:bg-blue-400 hover:scale-105 active:scale-95"
           disabled={loading}
         >
           <BsSearch className="text-xl" />
