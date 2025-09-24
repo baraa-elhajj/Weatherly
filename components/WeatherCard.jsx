@@ -9,7 +9,9 @@ export default function WeatherCard({ data }) {
   return (
     <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-[90%] sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
       <div className="text-center mb-4 sm:mb-6">
-        <h2 className="text-5xl sm:text-4xl font-bold">{data.name}</h2>
+        <h2 className="text-5xl sm:text-4xl font-bold">
+          {data.name}, {data.sys.country}
+        </h2>
         <p className="text-xs sm:text-sm opacity-80">
           {getCurrentFormattedDateAlpha()}
         </p>
