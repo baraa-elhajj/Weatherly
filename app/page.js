@@ -45,9 +45,7 @@ export default function Home() {
       await axios
         .get(citiesUrl, { params: citiesParams })
         .then((response) => {
-          console.log("getting suggestions for city ", city);
           setSuggestions(response.data);
-          console.log("suggestions ", suggestions);
         })
         .catch((error) => {
           console.error("Server Error:", error.response?.data);
@@ -73,7 +71,6 @@ export default function Home() {
   };
 
   const handleOnSelect = (city) => {
-    console.log("selected ", city.name);
     setCity(() => city.name);
     setSuggestions([]);
     fetchWeather(`${city.name},${city.country}`);
@@ -89,7 +86,6 @@ export default function Home() {
       appid: process.env.NEXT_PUBLIC_WEATHER_KEY,
     };
 
-    console.log("fetching weather for ", city);
     setLoading(true);
     await axios
       .get(url, { params })
