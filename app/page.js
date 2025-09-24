@@ -112,36 +112,28 @@ export default function Home() {
       <Logo />
       <Menu />
 
-      <div className="relative min-h-screen w-full overflow-hidden">
-        <Image
-          src="/background.jpg"
-          alt="Background"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
+      <Image
+        src="/background.jpg"
+        alt="Background"
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
 
-        <div className="relative z-20 w-[90%] sm:w-full max-w-md mx-auto ">
-          <SearchBar
-            city={city}
-            setCity={setCity}
-            onSubmit={handleOnSubmit}
-            loading={loading}
-            inputRef={inputRef}
-          />
+      <SearchBar
+        city={city}
+        setCity={setCity}
+        onSubmit={handleOnSubmit}
+        loading={loading}
+        inputRef={inputRef}
+      />
 
-          <SuggestionsList
-            suggestions={suggestions}
-            onSelect={(city) => handleOnSelect(city)}
-          />
-        </div>
+      <SuggestionsList
+        suggestions={suggestions}
+        onSelect={(city) => handleOnSelect(city)}
+      />
 
-        {weatherData?.main && (
-          <div className="absolute inset-0 flex justify-center items-center mt-30">
-            <WeatherCard data={weatherData} />
-          </div>
-        )}
-      </div>
+      {weatherData?.main && <WeatherCard data={weatherData} />}
     </>
   );
 }

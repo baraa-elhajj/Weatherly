@@ -7,16 +7,15 @@ export default function Menu() {
 
   return (
     <div className="absolute top-4 right-4 z-50">
-      {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer p-2 rounded-full text-white bg-blue-300/40 shadow-lg hover:scale-105 transition-all duration-200"
+        className="cursor-pointer p-2 rounded-full text-white bg-blue-400/40 shadow-lg hover:scale-105 transition-all duration-200"
       >
         {isOpen ? <RxCross2 size={20} /> : <RxHamburgerMenu size={20} />}
       </button>
 
       <div
-        className={`absolute top-12 right-0 w-35 rounded-2xl text-white bg-blue-300/40 backdrop-blur-md shadow-xl p-2 flex flex-col gap-2 transform transition-all duration-300 ease-out origin-top-right
+        className={`absolute top-12 right-0 w-35 rounded-2xl text-white bg-blue-400/40 backdrop-blur-md shadow-xl p-2 flex flex-col gap-2 transform transition-all duration-300 ease-out origin-top-right
                 ${
                   isOpen
                     ? "scale-100 opacity-100"
