@@ -8,6 +8,7 @@ import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Menu from "@/components/Menu";
 
 export default function Home() {
   const [city, setCity] = useState("");
@@ -106,35 +107,39 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      <Image
-        src="/background.jpg"
-        alt="Background"
-        fill
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
+    <>
+      <Menu />
 
-      <div className="relative z-20 w-[90%] sm:w-full max-w-md mx-auto ">
-        <SearchBar
-          city={city}
-          setCity={setCity}
-          onSubmit={handleOnSubmit}
-          loading={loading}
-          inputRef={inputRef}
+      <div className="relative min-h-screen w-full overflow-hidden">
+        <Image
+          src="/background.jpg"
+          alt="Background"
+          fill
+          className="object-cover"
         />
+        <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
 
-        <SuggestionsList
-          suggestions={suggestions}
-          onSelect={(city) => handleOnSelect(city)}
-        />
-      </div>
+        <div className="relative z-20 w-[90%] sm:w-full max-w-md mx-auto ">
+          <SearchBar
+            city={city}
+            setCity={setCity}
+            onSubmit={handleOnSubmit}
+            loading={loading}
+            inputRef={inputRef}
+          />
 
-      {weatherData?.main && (
-        <div className="absolute inset-0 flex justify-center items-center mt-30">
-          <WeatherCard data={weatherData} />
+          <SuggestionsList
+            suggestions={suggestions}
+            onSelect={(city) => handleOnSelect(city)}
+          />
         </div>
-      )}
-    </div>
+
+        {weatherData?.main && (
+          <div className="absolute inset-0 flex justify-center items-center mt-30">
+            <WeatherCard data={weatherData} />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
