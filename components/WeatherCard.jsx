@@ -2,12 +2,19 @@ import { getCurrentFormattedDateAlpha } from "@/utils/dateFormatter";
 import { WiHumidity } from "react-icons/wi";
 import { LuWind, LuThermometer } from "react-icons/lu";
 import { getIconSrc } from "@/utils/customWeatherIcon";
+import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 
 export default function WeatherCard({ data }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
 
   return (
     <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-[90%] sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
+      <div className="flex justify-end">
+        <button className="transform transition-all hover:scale-110 cursor-pointer">
+          <GoBookmark size="20" />
+        </button>
+      </div>
+
       <div className="text-center mb-4 sm:mb-6">
         <div className="flex flex-row items-center justify-center gap-1">
           <h2 className="text-4xl font-bold">{data.name}</h2>
