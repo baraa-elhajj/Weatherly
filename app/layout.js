@@ -1,14 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Varela_Round, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const varela_round = Varela_Round({
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -20,9 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={varela_round.className}>
         {children}
         <Toaster position="top-center" reverseOrder={false} />
       </body>
