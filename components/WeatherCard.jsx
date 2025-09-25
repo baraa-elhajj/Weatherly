@@ -3,6 +3,7 @@ import { WiHumidity } from "react-icons/wi";
 import { LuWind, LuThermometer } from "react-icons/lu";
 import { getIconSrc } from "@/utils/customWeatherIcon";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
+import Toast from "@/utils/Toast";
 
 export default function WeatherCard({ data, savedCities, setSavedCities }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
@@ -15,12 +16,16 @@ export default function WeatherCard({ data, savedCities, setSavedCities }) {
         localStorage.setItem("savedCities", JSON.stringify(newSavedCities));
         return newSavedCities;
       });
+
+      Toast("success", "City bookmarked!");
     } else {
       setSavedCities((prev) => {
         const newSavedCities = prev.filter((city) => city !== currentCity);
         localStorage.setItem("savedCities", JSON.stringify(newSavedCities));
         return newSavedCities;
       });
+
+      Toast("success", "City removed from bookmarks!");
     }
   };
 
