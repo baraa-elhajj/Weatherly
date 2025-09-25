@@ -18,7 +18,7 @@ export default function Menu() {
       </button>
 
       <div
-        className={`absolute top-12 right-0 w-35 rounded-2xl text-white bg-blue-400/40 backdrop-blur-md shadow-xl p-2 flex flex-col gap-2 transform transition-all duration-300 ease-out origin-top-right
+        className={`absolute top-12 right-0 w-30 sm:w-35 rounded-2xl text-white bg-blue-400/40 backdrop-blur-md shadow-xl p-2 flex flex-col gap-2 transform transition-all duration-300 ease-out origin-top-right
             ${
               isOpen
                 ? "scale-100 opacity-100"
