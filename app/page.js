@@ -7,13 +7,13 @@ import WeatherCard from "@/components/WeatherCard";
 
 import Toast from "@/utils/Toast";
 import { capitalizeFirstLetter } from "@/utils/stringFormatter";
+import { fetchWeather } from "@/services/weatherService";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [savedCities, setSavedCities] = useState([]);
   const inputRef = useRef(null);
@@ -51,6 +51,7 @@ export default function Home() {
     }
 
     const timeout = setTimeout(async () => {
+      // TODO: move to weatherService.js
       await axios
         .get(citiesUrl, { params: citiesParams })
         .then((response) => {
@@ -70,50 +71,39 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [city]);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!city || city === "") {
       Toast("error", "You must enter a city!");
       return;
     }
 
-    fetchWeather();
+    try {
+      const fetchedWeatherData = await fetchWeather(city);
+      setWeatherData(fetchedWeatherData);
+      localStorage.setItem("weatherData", JSON.stringify(fetchedWeatherData));
+      setCity("");
+    } catch (error) {
+      console.error("Server Error:", error.response?.data);
+      Toast("error", "Error fetching weather");
+    }
   };
 
-  const handleOnSelect = (city) => {
+  const handleOnSelect = async (city) => {
     setCity(() => city.name);
     setSuggestions([]);
-    fetchWeather(`${city.name},${city.country}`);
-  };
 
-  const fetchWeather = async (selectedCity) => {
-    const cityToFetch = selectedCity || city;
-    if (!cityToFetch) return;
-
-    const params = {
-      q: cityToFetch,
-      units: "metric",
-      appid: process.env.NEXT_PUBLIC_WEATHER_KEY,
-    };
-
-    setLoading(true);
-    await axios
-      .get(url, { params })
-      .then((response) => {
-        setWeatherData(response.data);
-        localStorage.setItem("weatherData", JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.error("Server Error:", error.response?.data);
-        Toast(
-          "error",
-          capitalizeFirstLetter(
-            error.response?.data?.message || "Error fetching weather"
-          )
-        );
-      });
-    setCity("");
-    setLoading(false);
+    try {
+      const fetchedWeatherData = await fetchWeather(
+        `${city.name},${city.country}`
+      );
+      setWeatherData(fetchedWeatherData);
+      localStorage.setItem("weatherData", JSON.stringify(fetchedWeatherData));
+      setCity("");
+    } catch (error) {
+      console.error("Server Error:", error.response?.data);
+      Toast("error", "Error fetching weather");
+    }
   };
 
   return (
@@ -124,7 +114,6 @@ export default function Home() {
         city={city}
         setCity={setCity}
         onSubmit={handleOnSubmit}
-        loading={loading}
         inputRef={inputRef}
       />
 
