@@ -4,18 +4,20 @@ import ErrorToast from "@/utils/ErrorToast";
 import SearchBar from "@/components/SearchBar";
 import SuggestionsList from "@/components/SuggestionsList";
 import WeatherCard from "@/components/WeatherCard";
+import Menu from "@/components/Menu";
+import Logo from "@/components/Logo";
+
 import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import Menu from "@/components/Menu";
-import Logo from "@/components/Logo";
 
 export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [savedCities, setSavedCities] = useState([]);
   const inputRef = useRef(null);
 
   const url = `https://api.openweathermap.org/data/2.5/weather`;
@@ -30,6 +32,13 @@ export default function Home() {
     const savedWeatherData = localStorage.getItem("weatherData");
     if (savedWeatherData) {
       setWeatherData(JSON.parse(savedWeatherData));
+    }
+  }, []);
+
+  useEffect(() => {
+    const savedCitiesList = localStorage.getItem("savedCities");
+    if (savedCitiesList) {
+      setSavedCities(JSON.parse(savedCitiesList));
     }
   }, []);
 
@@ -133,7 +142,13 @@ export default function Home() {
         onSelect={(city) => handleOnSelect(city)}
       />
 
-      {weatherData?.main && <WeatherCard data={weatherData} />}
+      {weatherData?.main && (
+        <WeatherCard
+          data={weatherData}
+          savedCities={savedCities}
+          setSavedCities={setSavedCities}
+        />
+      )}
     </>
   );
 }

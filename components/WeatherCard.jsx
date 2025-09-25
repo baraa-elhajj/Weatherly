@@ -4,15 +4,39 @@ import { LuWind, LuThermometer } from "react-icons/lu";
 import { getIconSrc } from "@/utils/customWeatherIcon";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 
-export default function WeatherCard({ data }) {
+export default function WeatherCard({ data, savedCities, setSavedCities }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
+  const currentCity = `${data.name},${data.sys.country}`;
 
   return (
     <div className="absolute inset-0 flex justify-center items-center mt-35">
       <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-[90%] sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
         <div className="flex justify-end">
-          <button className="transform transition-all hover:scale-110 cursor-pointer">
-            <GoBookmark size="20" />
+          <button
+            onClick={() => {
+              if (!savedCities.includes(currentCity)) {
+                setSavedCities((prev) => {
+                  const newSavedCities = [...prev, currentCity];
+                  console.log("Saved Cities list updated: ", newSavedCities);
+                  return newSavedCities;
+                });
+              } else {
+                setSavedCities((prev) => {
+                  const newSavedCities = prev.filter(
+                    (city) => city !== currentCity
+                  );
+                  console.log("Saved Cities list updated: ", newSavedCities);
+                  return newSavedCities;
+                });
+              }
+            }}
+            className="transform transition-all hover:scale-110 cursor-pointer"
+          >
+            {savedCities?.includes(currentCity) ? (
+              <GoBookmarkFill size="20" />
+            ) : (
+              <GoBookmark size="20" />
+            )}
           </button>
         </div>
 
