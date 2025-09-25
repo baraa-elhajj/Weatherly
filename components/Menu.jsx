@@ -1,6 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import { GoBookmarkFill, GoHomeFill } from "react-icons/go";
+import Link from "next/link";
 
 export default function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,30 +19,30 @@ export default function Menu() {
 
       <div
         className={`absolute top-12 right-0 w-35 rounded-2xl text-white bg-blue-400/40 backdrop-blur-md shadow-xl p-2 flex flex-col gap-2 transform transition-all duration-300 ease-out origin-top-right
-                ${
-                  isOpen
-                    ? "scale-100 opacity-100"
-                    : "scale-95 opacity-0 pointer-events-none"
-                }`}
+            ${
+              isOpen
+                ? "scale-100 opacity-100"
+                : "scale-95 opacity-0 pointer-events-none"
+            }`}
       >
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="p-2 rounded-xl hover:bg-blue-300/60 transition-colors"
           onClick={() => setIsOpen(false)}
         >
           <div className="flex flex-row gap-2">
             <GoHomeFill size="20" /> Home
           </div>
-        </a>
-        <a
-          href="#saved"
+        </Link>
+        <Link
+          href="/bookmarks"
           className="p-2 rounded-xl hover:bg-blue-300/60 transition-colors"
           onClick={() => setIsOpen(false)}
         >
           <div className="flex flex-row items-center gap-2">
             <GoBookmarkFill size="20" /> Saved
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );
