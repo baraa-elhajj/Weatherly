@@ -36,7 +36,7 @@ export default function WeatherCard({
 
   return (
     <div className="absolute inset-0 flex justify-center items-center mt-35">
-      <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-50 sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
+      <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-65 sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
         <div className="flex justify-end">
           <button
             onClick={handleButtonOnClick}
