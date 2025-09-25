@@ -1,15 +1,13 @@
 "use client";
 
-import Toast from "@/utils/Toast";
+import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import SuggestionsList from "@/components/SuggestionsList";
 import WeatherCard from "@/components/WeatherCard";
-import Menu from "@/components/Menu";
-import Logo from "@/components/Logo";
 
+import Toast from "@/utils/Toast";
 import { capitalizeFirstLetter } from "@/utils/stringFormatter";
 import axios from "axios";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -120,16 +118,7 @@ export default function Home() {
 
   return (
     <>
-      <Logo />
-      <Menu />
-
-      <Image
-        src="/background.jpg"
-        alt="Background"
-        fill
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
+      <Header />
 
       <SearchBar
         city={city}
