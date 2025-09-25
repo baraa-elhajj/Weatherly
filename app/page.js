@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorToast from "@/utils/ErrorToast";
+import Toast from "@/utils/Toast";
 import SearchBar from "@/components/SearchBar";
 import SuggestionsList from "@/components/SuggestionsList";
 import WeatherCard from "@/components/WeatherCard";
@@ -60,7 +60,8 @@ export default function Home() {
         })
         .catch((error) => {
           console.error("Server Error:", error.response?.data);
-          ErrorToast(
+          Toast(
+            "error",
             capitalizeFirstLetter(
               error.response?.data?.message || "Error fetching cities"
             )
@@ -74,7 +75,7 @@ export default function Home() {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (!city || city === "") {
-      ErrorToast("You must enter a city!");
+      Toast("error", "You must enter a city!");
       return;
     }
 
@@ -106,7 +107,8 @@ export default function Home() {
       })
       .catch((error) => {
         console.error("Server Error:", error.response?.data);
-        ErrorToast(
+        Toast(
+          "error",
           capitalizeFirstLetter(
             error.response?.data?.message || "Error fetching weather"
           )
