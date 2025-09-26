@@ -8,34 +8,9 @@ A simple, responsive weather app built with **Next.js**, **React**, and **Tailwi
 
 - **City Search** – Search for any city worldwide + minimal suggestions
 - **Real-Time Weather** – Shows temperature, weather condition, humidity, wind, and feels-like
+- **Save Cities** - Bookmark cities for quick views
 - **Modern UI** – Built with TailwindCSS, featuring smooth hover effects and rounded cards
 - **Fast & Lightweight** – Powered by Next.js for optimal performance
-
----
-
-## Project Structure
-
-```
-├── app/
-│   ├── favicon.ico
-│   ├── globals.css
-│   ├── layout.js
-│   └── page.js
-├── components/
-│   ├── SearchBar.jsx
-│   └── WeatherCard.jsx
-├── public/
-│   └── background.jpg
-├── utils/
-│   ├── dateFormatter.js
-│   └── stringFormatter.js
-├── .env (auto-hidden)
-├── README.md
-├── eslint.config.mjs
-├── jsconfig.json
-├── next.config.mjs
-└── postcss.config.mjs
-```
 
 ---
 
