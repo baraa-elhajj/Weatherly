@@ -28,6 +28,14 @@ export default function SavedList() {
     }
   }, [savedCities]);
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="w-15 h-15 sm:w-20 sm:h-20 border-4 border-blue-300 border-t-transparent rounded-full animate-spin mb-70" />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="mt-15 sm:mt-30 flex flex-wrap gap-x-4 gap-y-40 max-h-screen">
