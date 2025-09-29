@@ -7,6 +7,7 @@ export default function Toast(type, message) {
         style: {
           color: "white",
           background: "#8ec5ff66",
+          backdropFilter: "blur(12px)",
         },
         iconTheme: {
           primary: "#43e87d",
