@@ -30,7 +30,7 @@ export default function SavedList() {
 
   return (
     <>
-      <div className="mt-15 sm:mt-30 flex flex-wrap gap-x-4 gap-y-40 max-h-screen overflow-y-auto md:overflow-visible md:max-h-none snap-y snap-mandatory">
+      <div className="mt-15 sm:mt-30 flex flex-wrap gap-x-4 gap-y-40 max-h-screen">
         {weatherDataList.length > 0 ? (
           weatherDataList.map((weatherData) => (
             <div key={weatherData.id} className="scale-70 min-w-[150px] flex-1">
