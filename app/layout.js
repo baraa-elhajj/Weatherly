@@ -1,6 +1,7 @@
-import { Varela_Round, Poppins } from "next/font/google";
+import { Varela_Round } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { WeatherProvider } from "@/contexts/WeatherContext";
 
 const varela_round = Varela_Round({
   weight: ["400"],
@@ -16,8 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={varela_round.className}>
-        {children}
-        <Toaster position="top-center" reverseOrder={false} />
+        <WeatherProvider>
+          {children}
+          <Toaster position="top-center" reverseOrder={false} />
+        </WeatherProvider>
       </body>
     </html>
   );
