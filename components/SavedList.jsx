@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import WeatherCard from "./WeatherCard";
 import { fetchWeather } from "@/services/weatherService";
+import { useWeatherContext } from "@/contexts/WeatherContext";
 
 export default function SavedList() {
-  const [savedCities, setSavedCities] = useState([]);
   const [weatherDataList, setWeatherDataList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const savedCities = localStorage.getItem("savedCities");
-    if (savedCities) {
-      const cities = JSON.parse(savedCities);
-      setSavedCities(cities);
+  const { savedCities } = useWeatherContext();
 
+  useEffect(() => {
+    if (savedCities) {
+      console.log("savedCities: ", savedCities);
       const fetchAllWeather = async () => {
         setLoading(true);
         const data = await Promise.all(
-          cities.map((city) => fetchWeather(city))
+          savedCities.map((city) => fetchWeather(city))
         );
         console.log("data ", data);
         setWeatherDataList(data);
@@ -27,7 +26,7 @@ export default function SavedList() {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [savedCities]);
 
   return (
     <>
@@ -35,12 +34,7 @@ export default function SavedList() {
         {weatherDataList.length > 0 ? (
           weatherDataList.map((weatherData) => (
             <div key={weatherData.id} className="scale-70 min-w-[150px] flex-1">
-              <WeatherCard
-                simplified={true}
-                data={weatherData}
-                savedCities={savedCities}
-                setSavedCities={setSavedCities}
-              />
+              <WeatherCard simplified={true} data={weatherData} />
             </div>
           ))
         ) : (

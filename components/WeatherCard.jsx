@@ -4,15 +4,13 @@ import { LuWind, LuThermometer } from "react-icons/lu";
 import { getIconSrc } from "@/utils/customWeatherIcon";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 import Toast from "@/utils/Toast";
+import { useWeatherContext } from "@/contexts/WeatherContext";
 
-export default function WeatherCard({
-  data,
-  savedCities,
-  setSavedCities,
-  simplified = false,
-}) {
+export default function WeatherCard({ data, simplified = false }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
   const currentCity = `${data.name},${data.sys.country}`;
+
+  const { savedCities, setSavedCities } = useWeatherContext();
 
   const handleButtonOnClick = () => {
     if (!savedCities.includes(currentCity)) {

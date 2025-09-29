@@ -15,10 +15,8 @@ export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const [savedCities, setSavedCities] = useState([]);
   const inputRef = useRef(null);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather`;
   const citiesUrl = `https://api.openweathermap.org/geo/1.0/direct`;
   const citiesParams = {
     q: city,
@@ -30,13 +28,6 @@ export default function Home() {
     const savedWeatherData = localStorage.getItem("weatherData");
     if (savedWeatherData) {
       setWeatherData(JSON.parse(savedWeatherData));
-    }
-  }, []);
-
-  useEffect(() => {
-    const savedCitiesList = localStorage.getItem("savedCities");
-    if (savedCitiesList) {
-      setSavedCities(JSON.parse(savedCitiesList));
     }
   }, []);
 
@@ -122,13 +113,7 @@ export default function Home() {
         onSelect={(city) => handleOnSelect(city)}
       />
 
-      {weatherData?.main && (
-        <WeatherCard
-          data={weatherData}
-          savedCities={savedCities}
-          setSavedCities={setSavedCities}
-        />
-      )}
+      {weatherData?.main && <WeatherCard data={weatherData} />}
     </>
   );
 }
