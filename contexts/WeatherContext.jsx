@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const WeatherContext = createContext();
 
 export function WeatherProvider({ children }) {
+  const [city, setCity] = useState("");
   const [savedCities, setSavedCities] = useState([]);
 
   useEffect(() => {
@@ -18,7 +19,9 @@ export function WeatherProvider({ children }) {
   }, []);
 
   return (
-    <WeatherContext.Provider value={{ savedCities, setSavedCities }}>
+    <WeatherContext.Provider
+      value={{ savedCities, setSavedCities, city, setCity }}
+    >
       {children}
     </WeatherContext.Provider>
   );

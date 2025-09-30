@@ -8,12 +8,14 @@ import WeatherCard from "@/components/WeatherCard";
 import Toast from "@/utils/Toast";
 import { fetchCitySuggestions, fetchWeather } from "@/services/weatherService";
 import { useEffect, useRef, useState } from "react";
+import { useWeatherContext } from "@/contexts/WeatherContext";
 
 export default function Home() {
-  const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
+
+  const { city, setCity } = useWeatherContext();
 
   useEffect(() => {
     const savedWeatherData = localStorage.getItem("weatherData");
@@ -84,13 +86,7 @@ export default function Home() {
     <>
       <Header />
 
-      {/* TODO: Move city/setCity to context */}
-      <SearchBar
-        city={city}
-        setCity={setCity}
-        onSubmit={handleOnSubmit}
-        inputRef={inputRef}
-      />
+      <SearchBar onSubmit={handleOnSubmit} inputRef={inputRef} />
 
       <SuggestionsList
         suggestions={suggestions}

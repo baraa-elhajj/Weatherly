@@ -1,6 +1,9 @@
+import { useWeatherContext } from "@/contexts/WeatherContext";
 import { BsSearch } from "react-icons/bs";
 
-export default function SearchBar({ city, setCity, onSubmit, inputRef }) {
+export default function SearchBar({ onSubmit, inputRef }) {
+  const { city, setCity } = useWeatherContext();
+
   return (
     <div className="relative z-20 w-[90%] sm:w-full max-w-md mx-auto">
       <div className="flex justify-center items-start pt-16 px-4 mt-3">
