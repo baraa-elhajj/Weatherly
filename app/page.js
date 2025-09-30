@@ -6,9 +6,7 @@ import SuggestionsList from "@/components/SuggestionsList";
 import WeatherCard from "@/components/WeatherCard";
 
 import Toast from "@/utils/Toast";
-import { capitalizeFirstLetter } from "@/utils/stringFormatter";
-import { fetchWeather } from "@/services/weatherService";
-import axios from "axios";
+import { fetchCitySuggestions, fetchWeather } from "@/services/weatherService";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -16,13 +14,6 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
-
-  const citiesUrl = `https://api.openweathermap.org/geo/1.0/direct`;
-  const citiesParams = {
-    q: city,
-    limit: 5,
-    appid: process.env.NEXT_PUBLIC_WEATHER_KEY,
-  };
 
   useEffect(() => {
     const savedWeatherData = localStorage.getItem("weatherData");
@@ -42,21 +33,13 @@ export default function Home() {
     }
 
     const timeout = setTimeout(async () => {
-      // TODO: move to weatherService.js
-      await axios
-        .get(citiesUrl, { params: citiesParams })
-        .then((response) => {
-          setSuggestions(response.data);
-        })
-        .catch((error) => {
-          console.error("Server Error:", error.response?.data);
-          Toast(
-            "error",
-            capitalizeFirstLetter(
-              error.response?.data?.message || "Error fetching cities"
-            )
-          );
-        });
+      try {
+        const citySuggestions = await fetchCitySuggestions(city);
+        setSuggestions(citySuggestions);
+      } catch (error) {
+        console.error("Server Error:", error.response?.data.message);
+        Toast("error", "Error fetching cities");
+      }
     }, 300); // Debounce API calls for 300ms
 
     return () => clearTimeout(timeout);
@@ -101,6 +84,7 @@ export default function Home() {
     <>
       <Header />
 
+      {/* TODO: Move city/setCity to context */}
       <SearchBar
         city={city}
         setCity={setCity}

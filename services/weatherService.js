@@ -12,3 +12,18 @@ export const fetchWeather = async (city) => {
 
   return await axios.get(url, { params }).then((response) => response.data);
 };
+
+export const fetchCitySuggestions = async (input) => {
+  if (!input) return;
+
+  const citiesUrl = `https://api.openweathermap.org/geo/1.0/direct`;
+  const citiesParams = {
+    q: input,
+    limit: 5,
+    appid: process.env.NEXT_PUBLIC_WEATHER_KEY,
+  };
+
+  return await axios
+    .get(citiesUrl, { params: citiesParams })
+    .then((response) => response.data);
+};
