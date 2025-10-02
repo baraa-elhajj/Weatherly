@@ -51,9 +51,13 @@ then go to http://localhost:3000
 
 ## Preview
 
-| Desktop                                                                   | Mobile                                                                  |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| ![Desktop Screenshot](./public/screenshots/weatherly-desktop-preview.png) | ![Mobile Screenshot](./public/screenshots/weatherly-mobile-preview.png) |
+### Main page
+
+![Desktop Screenshot](./public/screenshots/weatherly-preview1.png)
+
+### Main + Saved pages
+
+![Mobile Screenshot](./public/screenshots/weatherly-preview2.gif)
 
 ---
 
