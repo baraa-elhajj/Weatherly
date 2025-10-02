@@ -63,7 +63,7 @@ then go to http://localhost:3000
 
 ## Live Demo
 
-Deployed on Vercel: https://weatherly-lb.vercel.app/
+Deployed on Vercel: <a href="https://weatherly-lb.vercel.app" target="_blank">weatherly-lb.vercel.app</a>
 
 ---
 
