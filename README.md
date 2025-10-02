@@ -57,7 +57,7 @@ then go to http://localhost:3000
 
 ### Main + Saved pages
 
-![Mobile Screenshot](./public/screenshots/weatherly-preview2.gif)
+![Main + saved Screenshot](./public/screenshots/weatherly-preview2.gif)
 
 ---
 
