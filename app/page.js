@@ -10,6 +10,8 @@ import { fetchCitySuggestions, fetchWeather } from "@/services/weatherService";
 import { useEffect, useRef, useState } from "react";
 import { useWeatherContext } from "@/contexts/WeatherContext";
 
+const CITY_LOCAL_STORAGE_KEY = "city";
+
 export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
@@ -17,11 +19,22 @@ export default function Home() {
 
   const { city, setCity } = useWeatherContext();
 
+  // Fetches the last searched city's weather data
   useEffect(() => {
-    const savedWeatherData = localStorage.getItem("weatherData");
-    if (savedWeatherData) {
-      setWeatherData(JSON.parse(savedWeatherData));
+    async function fetchData() {
+      const lastCity = localStorage.getItem(CITY_LOCAL_STORAGE_KEY);
+      if (lastCity) {
+        try {
+          const fetchedLastWeatherData = await fetchWeather(lastCity);
+          setWeatherData(fetchedLastWeatherData);
+        } catch (error) {
+          console.error("Server Error:", error.response?.data);
+          Toast("error", "Error fetching weather");
+        }
+      }
     }
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -57,7 +70,8 @@ export default function Home() {
     try {
       const fetchedWeatherData = await fetchWeather(city);
       setWeatherData(fetchedWeatherData);
-      localStorage.setItem("weatherData", JSON.stringify(fetchedWeatherData));
+
+      localStorage.setItem(CITY_LOCAL_STORAGE_KEY, city);
       setCity("");
     } catch (error) {
       console.error("Server Error:", error.response?.data);
@@ -74,7 +88,11 @@ export default function Home() {
         `${city.name},${city.country}`
       );
       setWeatherData(fetchedWeatherData);
-      localStorage.setItem("weatherData", JSON.stringify(fetchedWeatherData));
+
+      localStorage.setItem(
+        CITY_LOCAL_STORAGE_KEY,
+        `${city.name},${city.country}`
+      );
       setCity("");
     } catch (error) {
       console.error("Server Error:", error.response?.data);
