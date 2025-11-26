@@ -12,13 +12,11 @@ export default function SavedList() {
 
   useEffect(() => {
     if (savedCities) {
-      console.log("savedCities: ", savedCities);
       const fetchAllWeather = async () => {
         setLoading(true);
         const data = await Promise.all(
           savedCities.map((city) => fetchWeather(city))
         );
-        console.log("data ", data);
         setWeatherDataList(data);
         setLoading(false);
       };
