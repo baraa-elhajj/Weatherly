@@ -6,8 +6,10 @@ import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 import Toast from "@/utils/Toast";
 import { useWeatherContext } from "@/contexts/WeatherContext";
 import { useRouter } from "next/navigation";
-
-const CITY_LOCAL_STORAGE_KEY = "city";
+import {
+  CITY_LOCAL_STORAGE_KEY,
+  SAVED_CITIES_LOCAL_STORAGE_KEY,
+} from "@/constants";
 
 export default function WeatherCard({ data, simplified = false }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
@@ -26,7 +28,10 @@ export default function WeatherCard({ data, simplified = false }) {
     if (!savedCities.includes(currentCity)) {
       setSavedCities((prev) => {
         const newSavedCities = [...prev, currentCity];
-        localStorage.setItem("savedCities", JSON.stringify(newSavedCities));
+        localStorage.setItem(
+          SAVED_CITIES_LOCAL_STORAGE_KEY,
+          JSON.stringify(newSavedCities)
+        );
         return newSavedCities;
       });
 
@@ -34,7 +39,10 @@ export default function WeatherCard({ data, simplified = false }) {
     } else {
       setSavedCities((prev) => {
         const newSavedCities = prev.filter((city) => city !== currentCity);
-        localStorage.setItem("savedCities", JSON.stringify(newSavedCities));
+        localStorage.setItem(
+          SAVED_CITIES_LOCAL_STORAGE_KEY,
+          JSON.stringify(newSavedCities)
+        );
         return newSavedCities;
       });
 
