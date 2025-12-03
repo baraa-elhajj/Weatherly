@@ -5,6 +5,9 @@ import { getIconSrc } from "@/utils/customWeatherIcon";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 import Toast from "@/utils/Toast";
 import { useWeatherContext } from "@/contexts/WeatherContext";
+import { useRouter } from "next/navigation";
+
+const CITY_LOCAL_STORAGE_KEY = "city";
 
 export default function WeatherCard({ data, simplified = false }) {
   const iconSrc = getIconSrc(data.weather?.[0]);
@@ -12,7 +15,13 @@ export default function WeatherCard({ data, simplified = false }) {
 
   const { savedCities, setSavedCities } = useWeatherContext();
 
+  const router = useRouter();
   const handleButtonOnClick = () => {
+    localStorage.setItem(CITY_LOCAL_STORAGE_KEY, currentCity);
+    router.push("/");
+  };
+
+  const handleBookmarkButtonOnClick = () => {
     if (!savedCities.includes(currentCity)) {
       setSavedCities((prev) => {
         const newSavedCities = [...prev, currentCity];
@@ -33,11 +42,18 @@ export default function WeatherCard({ data, simplified = false }) {
   };
 
   return (
-    <div className="absolute inset-0 flex justify-center items-center mt-35">
+    <div
+      className={`absolute inset-0 flex justify-center items-center mt-35 ${
+        simplified && "hover:cursor-pointer"
+      }`}
+      onClick={() => {
+        simplified && handleButtonOnClick();
+      }}
+    >
       <div className="bg-blue-300/40 rounded-3xl shadow-2xl w-65 sm:w-96 mx-auto p-4 sm:p-6 text-white transform transition-all hover:scale-[1.02] hover:bg-blue-300/50">
         <div className="flex justify-end">
           <button
-            onClick={handleButtonOnClick}
+            onClick={handleBookmarkButtonOnClick}
             className="transform transition-all hover:scale-110 cursor-pointer"
           >
             {savedCities?.includes(currentCity) ? (
